@@ -10,10 +10,12 @@ import UIKit
 
 class SplashViewController: UIViewController {
     let contentView: SplashView
+    weak var delegate: SplashFlowDelegate?
     
     
-    init(contentView: SplashView) {
+    init(contentView: SplashView, delegate: SplashFlowDelegate) {
         self.contentView = contentView
+        self.delegate = delegate
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -24,6 +26,8 @@ class SplashViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        
+        decideFlow()
     }
     
     private func setup(){
@@ -44,5 +48,14 @@ class SplashViewController: UIViewController {
             contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    
+    private func decideFlow(){
+        // decidir se o usuario vai pra home ou para tela de dicas
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {[weak self ] in self?.delegate?.decideNavigationFlow()
+            
+        }
+        
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Category: Decoder {
+struct Category: Decodable {
     let id: String
     let name: String
 }
