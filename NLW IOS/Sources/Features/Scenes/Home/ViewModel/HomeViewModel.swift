@@ -59,7 +59,7 @@ private func fetchCategories(completion: @escaping ([Category]) -> Void) {
             print("Deu erro ao pegar a categories de de data")
             completion([])
         }
-    }
+    }.resume()
     
 }
 
